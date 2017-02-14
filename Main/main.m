@@ -31,7 +31,7 @@ function main(const)
 
 % Experimental design
 % -------------------
-[expDes] = designConfig(const);
+[Trialevents] = designConfig(const);
 
 % Open screen window
 
