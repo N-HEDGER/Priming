@@ -33,6 +33,7 @@ const.targmorphstrength =2;
 % Low, High.
 
 const.SOAs=[13 26 40 80 500 1000];
+% May need adjuting based on refresh we seem to have.
 
 const.reps=10;
 
