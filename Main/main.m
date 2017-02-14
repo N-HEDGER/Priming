@@ -27,7 +27,7 @@ function main(const)
 
 % Keyboard configurations
 % -----------------------
-tic;[my_key] = keyConfig;
+[my_key] = keyConfig;
 
 % Experimental constant
 % ---------------------
