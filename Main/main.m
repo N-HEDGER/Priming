@@ -23,7 +23,11 @@ function main(const)
 
 % Keyboard configurations
 % -----------------------
-% [my_key] = keyConfig;
+[my_key] = keyConfig;
+
+% Text configurations
+% -----------------------
+[text] = textconfig;
 
 % Experimental constant
 % ---------------------
