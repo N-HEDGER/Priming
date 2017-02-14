@@ -21,4 +21,5 @@ function [const] = sbjConfig(const)
 sbj=struct();
 sbj=RunExp;
 const.sbj=sbj;
+isfixed=const.sbj.isfixed;
 end

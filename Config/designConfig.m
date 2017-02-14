@@ -7,4 +7,4 @@ Table=[Table; trialmat];
 end
 
                     
-const.trialmat=GenerateEventTable(conds,const.reps,isfixed)
+trial.trialmat=GenerateEventTable(conds,const.reps,isfixed)
