@@ -1,4 +1,21 @@
-%Constants
+function [const]=const_config(scr,const)
+% ----------------------------------------------------------------------
+% [scr]=scrConfig(const)
+% ----------------------------------------------------------------------
+% Goal of the function :
+% Define configuration relative to the screen
+% ----------------------------------------------------------------------
+% Input(s) :
+% scr : struct containing screen configurations
+% const : struct containing constant configurations
+% ----------------------------------------------------------------------
+% Output(s):
+% const: struct containing constant configurations
+% ----------------------------------------------------------------------
+% Function created by Nick Hedger
+% Project :     Priming
+% Version :     1.0
+% ----------------------------------------------------------------------
 
 
 %% Design parameters
@@ -30,4 +47,4 @@ const.element_sizeVal=4;
 const.element_size=vaDeg2pix(const.element_sizeVal,scr);
 const.stimctr=scr.mid;
 
-
+end
