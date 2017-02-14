@@ -3,17 +3,16 @@ function main(const)
 % main(const)
 % ----------------------------------------------------------------------
 % Goal of the function :
-% Launch all function of the experiment
+% Launch all functions of the experiment
 % ----------------------------------------------------------------------
 % Input(s) :
-% const : struct containing a lot of constant configuration
+% const : struct containing a some constant configuration
 % ----------------------------------------------------------------------
 % Output(s):
 % none
 % ----------------------------------------------------------------------
-% Function created by Martin SZINTE (martin.szinte@gmail.com)
-% Last update : 27 / 11 / 2016
-% Project :     pRF_threat
+% Function created by Nick Hedger
+% Project :     priming
 % Version :     1.0
 % ----------------------------------------------------------------------
 
