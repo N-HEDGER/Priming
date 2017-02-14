@@ -40,8 +40,6 @@ const.reps=10;
 const.numtrials=(const.primetypes*const.primeval*const.targem*const.targmorphstrength*length(const.SOAs)*const.reps);
 
 
-
-
 %% Stimulus parameters
 const.element_sizeVal=4;
 const.element_size=vaDeg2pix(const.element_sizeVal,scr);

@@ -20,7 +20,7 @@ dir = (which('expLauncher'));cd(dir(1:end-18));
 
 % Add Matlab path
 % ---------------
-addpath('Config','Main','Stim','Trial','Data','Conversion','Misc');
+addpath('Config','Main','Stim','Trial','Data','Conversion','Misc','GUI');
 
 % Subject configuration
 % ---------------------

@@ -18,4 +18,7 @@ function [const] = sbjConfig(const)
 
 % GUI elements
 
+sbj=struct();
+sbj=RunExp;
+const.sbj=sbj;
 end

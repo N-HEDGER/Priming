@@ -17,10 +17,6 @@ function main(const)
 % Version :     1.0
 % ----------------------------------------------------------------------
 
-% File director
-% -------------
-[const] = dirSaveFile(const);
-
 % Screen configurations
 % ---------------------
 [scr] = scrConfig(const);
