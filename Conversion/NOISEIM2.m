@@ -1,5 +1,21 @@
-function [image] = NOISEIM2 (startim,prop,isplot)
-
+function [noiseim] = NOISEIM2 (startim,prop,isplot)
+% ----------------------------------------------------------------------
+% [image] = NOISEIM2 (startim,prop,isplot)
+% ----------------------------------------------------------------------
+% Goal of the function :
+% Convert color image to noise image
+% ----------------------------------------------------------------------
+% Input(s) :
+% image = starting rgb image            
+% prop = proportion of pixels to apply the salt and pepper noise to       
+% ----------------------------------------------------------------------
+% Output(s):
+% noiseim = noise image.                         
+% ----------------------------------------------------------------------
+% Function created by Nick Hedger
+% Project : All
+% Version : 1.0
+% ----------------------------------------------------------------------
 
 % Set up cell for R, G and B planes
 RPLANE=cell(1,1);
@@ -21,12 +37,13 @@ end
 % density of the noise e.g. 0.5 - noise is applied to half of the pixels. 
 NOISE=cell(1,1);
 NOISE{1}=imnoise(rgb2gray(startim),'salt & pepper',prop);
-
+NOISE2{1}=imnoise(rgb2gray(startim),'salt & pepper',prop);
+NOISE3{1}=imnoise(rgb2gray(startim),'salt & pepper',prop);
 % Give the noise the same amplitude spectra as the R G and B planes from
 % the image
 [RNOISE]=specMatch(NOISE,0,RSPEC);
-[GNOISE]=specMatch(NOISE,0,GSPEC);
-[BNOISE]=specMatch(NOISE,0,BSPEC);
+[GNOISE]=specMatch(NOISE2,0,GSPEC);
+[BNOISE]=specMatch(NOISE3,0,BSPEC);
 
 % Create new rgb image by combining the 3 noise images
 NOISE=gray2rgb(RNOISE{1});
@@ -35,7 +52,7 @@ NOISE(:,:,2)=GNOISE{1};
 NOISE(:,:,3)=BNOISE{1};
 
 % normalise.
-image=normalise(NOISE);
+noiseim=normalise(NOISE);
 if isplot
 subplot(1,2,1)
 imshow(image)
