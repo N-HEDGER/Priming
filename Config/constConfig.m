@@ -42,9 +42,12 @@ const.numtrials=(const.primetypes*const.primeval*const.targem*const.targmorphstr
 
 
 %% Stimulus parameters
+const.background_color=[128 128 128];
+
 const.element_sizeVal=4;
 const.element_size=vaDeg2pix(const.element_sizeVal,scr);
 const.stimctr=scr.mid;
+
 
 const.stimbot=scr.scr_sizeY;
 const.stimright=scr.scr_sizeX;
@@ -54,7 +57,7 @@ const.slidebar_xsize=const.stimright/2;
 const.slidebar_ysize=10;
 
 const.bar_xPosition=const.stimctr(1)-const.slidebar_xsize;
-const.bar_xPosition=const.stimbot*0.85;
+const.bar_yPosition=const.stimbot*0.85;
 
 
 end

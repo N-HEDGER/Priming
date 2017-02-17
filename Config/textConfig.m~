@@ -21,7 +21,7 @@ text.formatSpecTexture=('Textures drawn at: %f');
 text.formatSpecFlip=('Textures flipped at: %f');
 text.formatSpecResponse=('Response made at: %f');
 text.formatSpecQuit=('Subject quitted at: %s');
-text.instruct=sprintf('In this experiment you will be required to make 2 responses\n Firstly you will need to indicate whether face stimuli are happy or angry\n Next you will be required to rate your perception of any preceding stimuli on a 4 point scale\n');
+text.instruct=sprintf('In this experiment you will be required to make 2 responses\Firstly you will need to indicate whether face stimuli are \n When you make your settings hit space to continue to next trial\n');
 
 
 
