@@ -18,6 +18,8 @@ function [noiseim] = NOISEIM2 (startim,prop,isplot)
 % ----------------------------------------------------------------------
 
 % Set up cell for R, G and B planes
+
+
 RPLANE=cell(1,1);
 GPLANE=cell(1,1);
 BPLANE=cell(1,1);
