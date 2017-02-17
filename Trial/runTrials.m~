@@ -1,6 +1,6 @@
 function runTrials(scr,const,Trialevents,my_key,text)
 % ----------------------------------------------------------------------
-% runTrials(scr,const,Trialevents,my_key,text)
+% runTrials(scr,const,expDes,my_key)
 % ----------------------------------------------------------------------
 % Goal of the function :
 % Launch each trial, instructions and connection with eyelink
@@ -24,17 +24,15 @@ function runTrials(scr,const,Trialevents,my_key,text)
 % -------------------------------------
 % config.scr = scr; config.const = const; config.Trialevents = Trialevents; config.my_key = my_key;
 % save(const.exp_file_mat,'config');
-%% Make all textures
+
+% Main Loop
+% ---------
 
 
-
-
-%% Experimental loop
-
- for i = 1:10;
+ for t = 1:10;
 
     % Run single trial
-    [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,i);
+    [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,t);
      
 %     log_txt = sprintf('trial %i stopped at %f',t-1,GetSecs);
 %     fprintf(const.log_text_fid,'%s\n',log_txt);
