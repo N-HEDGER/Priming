@@ -22,20 +22,23 @@ function [Trialevents]=runSingleTrial(scr,const,Trialevents,my_key,text,i)
 
 %% Prepare stimuli
 %  ---------------
+trial.SOA               
+trial.primetype    
+trial.primeval        
+stim.targem          
+stim.targmorphstrength
+stim.targmod
 
-trial.trialnum=num2str(Trialevents.trialmat(i,1));  
-trial.primetype=Trialevents.trialmat(i,2);    
-trial.primeval=Trialevents.trialmat(i,3);          
-trial.targem =Trialevents.trialmat(i,4);           
-trial.targmorphstrength=Trialevents.trialmat(i,5); 
-trial.SOA=Trialevents.trialmat(i,6); 
+
+text.formatSpecTrial=('Trial %s Primetype: %s Prime valence: %s Target emotion: %s Target morph strength: %s');
 
 
-log_text=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.primetype},text.primevallabel{trial.primeval},text.targemlabel{trial.targem},text.targmorphstrengthlabel{trial.targmorphstrength});
-log_text
+sprintf(text.formatSpecTrial,trial(i),text.primetypelabel{trial.primetype},text.primevallabel{trial.val}  );
+
 
 %% Main clock
     %  ----------
+	current_time = GetSecs;
     %% Drawings
     %  --------
 end
