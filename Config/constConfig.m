@@ -40,6 +40,7 @@ const.reps=10;
 %960 trials
 const.numtrials=(const.primetypes*const.primeval*const.targem*const.targmorphstrength*length(const.SOAs)*const.reps);
 
+const.ITI=2;
 
 %% Stimulus parameters
 const.background_color=[128 128 128];
@@ -47,7 +48,7 @@ const.background_color=[128 128 128];
 const.element_sizeVal=4;
 const.element_size=vaDeg2pix(const.element_sizeVal,scr);
 const.stimctr=scr.mid;
-
+const.asp=1.33
 
 const.stimbot=scr.scr_sizeY;
 const.stimright=scr.scr_sizeX;

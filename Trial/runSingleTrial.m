@@ -28,14 +28,22 @@ trial.primetype=Trialevents.trialmat(i,2);
 trial.primeval=Trialevents.trialmat(i,3);          
 trial.targem =Trialevents.trialmat(i,4);           
 trial.targmorphstrength=Trialevents.trialmat(i,5); 
-trial.SOA=Trialevents.trialmat(i,6); 
+trial.SOA=Trialevents.trialmat(i,6)/1000; 
 
 
-log_text=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.primetype},text.primevallabel{trial.primeval},text.targemlabel{trial.targem},text.targmorphstrengthlabel{trial.targmorphstrength});
-log_text
+log_txt=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.primetype},text.primevallabel{trial.primeval},text.targemlabel{trial.targem},text.targmorphstrengthlabel{trial.targmorphstrength});
+fprintf(const.log_text_fid,'%s\n',log_txt);
+
 
 %% Main clock
     %  ----------
     %% Drawings
     %  --------
+    
+   Screen('DrawTexture',scr.main,const.Masktex{randi(100)},[const.maskrect]);
+   M1onset=Screen('Flip',scr.main);
+   Screen('DrawTexture',scr.main,const.Masktex{randi(100)},[const.maskrect]);
+   M2onset=Screen('Flip',scr.main,[M1onset+trial.SOA]);
+   Trialevents.elapsed{i}=M2onset-M1onset;
+    
 end

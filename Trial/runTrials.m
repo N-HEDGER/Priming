@@ -25,25 +25,36 @@ function runTrials(scr,const,Trialevents,my_key,text)
 % config.scr = scr; config.const = const; config.Trialevents = Trialevents; config.my_key = my_key;
 % save(const.exp_file_mat,'config');
 %% Make all textures
+Masks=load('masks.mat');
+Masks=Masks.noiseim;
 
-
+for t=1:length(Masks)
+    const.Masktex{t}=Screen('MakeTexture', scr.main, im2uint8(Masks{t}));
+end
+    
+[const.maskrect,dh,dv] = CenterRect([0 0 const.element_size*const.asp const.element_size], scr.rect)
 
 
 %% Experimental loop
 
- for i = 1:10;
+log_txt=sprintf(text.formatSpecStart,num2str(clock));
+fprintf(const.log_text_fid,'%s\n',log_txt);
+Trialevents.elapsed=cell(1,length(Trialevents.trialmat));
+
+ for i = 1:100;
 
     % Run single trial
-    [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,i);
-     
+   [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,i);
+    WaitSecs(const.ITI);
 %     log_txt = sprintf('trial %i stopped at %f',t-1,GetSecs);
 %     fprintf(const.log_text_fid,'%s\n',log_txt);
     
 end
 
-
-% config.scr = scr; config.const = const; config.Trialevents = expDes; config.my_key = my_key;
-% save(const.exp_file_mat,'config');
+Screen('CloseAll');
+const.Masktex=[];
+config.scr = scr; config.const = const; config.Trialevents = Trialevents; config.my_key = my_key;config.text = text;
+save(const.filename,'config');
 
 % End messages
 % ------------

@@ -36,6 +36,9 @@ function main(const)
 % -------------------
 [Trialevents] = designConfig(const);
 
+
+const.log_text_fid=fopen(const.txtfilename,'a+');
+
 % Open screen window
 
 % ------------------
@@ -50,12 +53,9 @@ DrawFormattedText(scr.main, text.instruct, scr.x_mid, scr.y_mid, WhiteIndex(scr.
 % Update the display to show the instruction text:
 Screen('Flip', scr.main);
 KbWait
-Screen('CloseAll')
 
 % % Trial runner
 % % ------------
-
-
 runTrials(scr,const,Trialevents,my_key,text);
 % 
 % % End

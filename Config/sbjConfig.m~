@@ -23,6 +23,6 @@ sbj=RunExp;
 const.sbj=sbj;
 const.isfixed=const.sbj.isfixed;
 const.filename=strcat('Data/',const.sbj.subname{1},'.mat');
-const.txtfilename=strcat('Data/',const.sbj.subname{1},'.txt');
+const.txtfilename=strcat('Data/',const.sbj.subname{1},'.mat');
 
 end

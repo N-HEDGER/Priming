@@ -1,6 +1,6 @@
 function runTrials(scr,const,Trialevents,my_key,text)
 % ----------------------------------------------------------------------
-% runTrials(scr,const,expDes,my_key)
+% runTrials(scr,const,Trialevents,my_key,text)
 % ----------------------------------------------------------------------
 % Goal of the function :
 % Launch each trial, instructions and connection with eyelink
@@ -24,15 +24,24 @@ function runTrials(scr,const,Trialevents,my_key,text)
 % -------------------------------------
 % config.scr = scr; config.const = const; config.Trialevents = Trialevents; config.my_key = my_key;
 % save(const.exp_file_mat,'config');
+%% Make all textures
+Masks=load('masks.mat');
+Masks=Masks.noiseim;
 
-% Main Loop
-% ---------
+for t=1:length(Masks)
+    Masktex=Screen('MakeTexture', scr.main, Masks{t});
+end
+    
+
+[imRectL,dh,dv] = CenterRect([0 0 InputDatastruct.const.IM_WIDTH_DISP InputDatastruct.const.IM_HEIGHT_DISP], InputDatastruct.const.wRectL)
 
 
- for t = 1:10;
+%% Experimental loop
+
+ for i = 1:10;
 
     % Run single trial
-    [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,t);
+    [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,i);
      
 %     log_txt = sprintf('trial %i stopped at %f',t-1,GetSecs);
 %     fprintf(const.log_text_fid,'%s\n',log_txt);
