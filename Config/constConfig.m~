@@ -46,15 +46,14 @@ const.element_sizeVal=4;
 const.element_size=vaDeg2pix(const.element_sizeVal,scr);
 const.stimctr=scr.mid;
 
-const.stimbot=scr.scr_sizeY;
-const.stimright=scr.scr_sizeX;
+const.stimbot=scr_sizey;
+const.stimright=scr_sizeY;
 
 const.selectRect=[0 0 10 40];
 const.slidebar_xsize=const.stimright/2;
 const.slidebar_ysize=10;
 
-const.bar_xPosition=const.stimctr(1)-const.slidebar_xsize;
-const.bar_xPosition=const.stimbot*0.85;
+const.bar_xPosition=const.stimctr(1)
 
 
 end
