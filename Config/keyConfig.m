@@ -18,4 +18,6 @@ function [my_key]=keyConfig
 KbName('UnifyKeyNames');                 
 my_key.escape   =   KbName('ESCAPE');
 my_key.space    =   KbName('Space');
+my_key.angry    =   KbName('LeftArrow');
+my_key.happy    =   KbName('RightArrow');
 end

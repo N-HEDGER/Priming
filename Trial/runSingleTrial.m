@@ -1,9 +1,9 @@
 function [Trialevents]=runSingleTrial(scr,const,Trialevents,my_key,text,i)
 % ----------------------------------------------------------------------
-% [expDes]=runSingleTrial(scr,const,expDes,my_key,t)
+% [expDes]=runSingleTrial(scr,const,Trialevents,my_key,text,i)
 % ----------------------------------------------------------------------
 % Goal of the function :
-% Draw stimuli of each indivual trial and waiting for inputs
+% Draw stimuli of each indivual trial and collect inputs
 % ----------------------------------------------------------------------
 % Input(s) :
 % scr : struct containing screen configurations
@@ -23,6 +23,7 @@ function [Trialevents]=runSingleTrial(scr,const,Trialevents,my_key,text,i)
 %% Prepare stimuli
 %  ---------------
 
+% Trial-level variables;
 trial.trialnum=num2str(Trialevents.trialmat(i,1));  
 trial.primetype=Trialevents.trialmat(i,2);    
 trial.primeval=Trialevents.trialmat(i,3);          
@@ -34,19 +35,29 @@ trial.SOA=Trialevents.trialmat(i,6)/1000;
 log_txt=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.primetype},text.primevallabel{trial.primeval},text.targemlabel{trial.targem},text.targmorphstrengthlabel{trial.targmorphstrength});
 fprintf(const.log_text_fid,'%s\n',log_txt);
 
-
-%% Main clock
-    %  ----------
     %% Drawings
-    %  --------
-   Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
-   Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[const.maskrect]);
-   M1onset=Screen('Flip',scr.main);
+    %  First mask
     Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
-   Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[const.maskrect]);
-   M2onset=Screen('Flip',scr.main,[M1onset+trial.SOA]);
-   Trialevents.elapsed{i}=M2onset-M1onset;
-   Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
-   Screen('Flip',scr.main,[M2onset+const.maskdur]);
+    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[const.maskrect]);
+    M1onset=Screen('Flip',scr.main);
+    % Prime Stim     
+    
+    %  Second mask
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[const.maskrect]);
+    M2onset=Screen('Flip',scr.main,[M1onset+trial.SOA]);
+    Trialevents.elapsed{i}=M2onset-M1onset;
+   
+    % 2AFC target face judgement
+    
+    Screen('Flip',scr.main,[M2onset+const.maskdur]);
+    
+    %Perceptual awareness scale and slidebar elements;
+    
+    
+    
+    %Return to just surround.
+   
+    
     
 end
