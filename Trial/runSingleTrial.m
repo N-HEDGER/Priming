@@ -39,11 +39,14 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
     %  ----------
     %% Drawings
     %  --------
-    
-   Screen('DrawTexture',scr.main,const.Masktex{randi(100)},[const.maskrect]);
+   Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
+   Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[const.maskrect]);
    M1onset=Screen('Flip',scr.main);
-   Screen('DrawTexture',scr.main,const.Masktex{randi(100)},[const.maskrect]);
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
+   Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[const.maskrect]);
    M2onset=Screen('Flip',scr.main,[M1onset+trial.SOA]);
    Trialevents.elapsed{i}=M2onset-M1onset;
+   Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
+   Screen('Flip',scr.main,[M2onset+const.maskdur]);
     
 end

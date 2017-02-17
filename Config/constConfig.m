@@ -49,6 +49,7 @@ const.element_sizeVal=4;
 const.element_size=vaDeg2pix(const.element_sizeVal,scr);
 const.stimctr=scr.mid;
 const.asp=1.33
+const.framewidth=100;
 
 const.stimbot=scr.scr_sizeY;
 const.stimright=scr.scr_sizeX;
@@ -60,5 +61,8 @@ const.slidebar_ysize=10;
 const.bar_xPosition=const.stimctr(1)-const.slidebar_xsize;
 const.bar_yPosition=const.stimbot*0.85;
 
+
+% Mask;
+const.maskdur=0.2;
 
 end
