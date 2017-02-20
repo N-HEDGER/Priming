@@ -69,7 +69,7 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
     Trialevents.AFCTRT{i}=secs-t1;
     
     %Perceptual awareness scale and slidebar elements;
-    for i=const.awrect(1):5:const.awrect(3)
+    for i=const.awrect(1):160:const.awrect(3)
                 
                 tick_offset = OffsetRect(const.tick, i, const.awrect(2)-2);
                 Screen('FillRect', scr.main, const.rectColor, tick_offset);

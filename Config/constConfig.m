@@ -48,7 +48,7 @@ const.background_color=[128 128 128];
 const.element_sizeVal=4;
 const.element_size=vaDeg2pix(const.element_sizeVal,scr);
 const.stimctr=scr.mid;
-const.asp=1.33
+const.asp=1.33;
 const.framewidth=100;
 
 const.stimbot=scr.scr_sizeY;
