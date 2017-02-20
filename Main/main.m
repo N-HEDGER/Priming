@@ -48,7 +48,7 @@ Screen('Preference', 'SkipSyncTests', 1);
 Screen('BlendFunction', scr.main, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 priorityLevel = MaxPriority(scr.main);Priority(priorityLevel);
 
-DrawFormattedText(scr.main, text.instruct, scr.x_mid, scr.y_mid, WhiteIndex(scr.main),[],[]);
+DrawFormattedText(scr.main, text.instruct, 'justifytomax', 100, WhiteIndex(scr.main),[],[]);
 
 % Update the display to show the instruction text:
 Screen('Flip', scr.main);

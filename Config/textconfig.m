@@ -26,7 +26,7 @@ text.primetypelabel={'face','IAPS'};
 text.targemlabel={'anger','happy'};
 text.targmorphstrengthlabel={'low','high'};
 text.formatSpecTrial=('Trial %s Primetype: %s Prime valence: %s Target emotion: %s Target morph strength: %s');
-
+text.AFC='Angry (Left) or Happy (Right)?';
 
 
 end

@@ -49,8 +49,23 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
     Trialevents.elapsed{i}=M2onset-M1onset;
    
     % 2AFC target face judgement
-    
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
+    DrawFormattedText(scr.main, text.AFC, 'justifytomax', scr.y_mid, WhiteIndex(scr.main),[],[]);
     Screen('Flip',scr.main,[M2onset+const.maskdur]);
+    
+    t1=GetSecs;
+    [KeyIsDown,secs,keyCode]=KbCheck;
+    while keyCode(my_key.angry)==0 && keyCode(my_key.happy)==0 && keyCode(my_key.escape)==0
+        [KeyisDown,secs,keyCode]=KbCheck;
+    end
+    
+    if keyCode(my_key.angry)==1;
+        Trialevents.AFCresp{i}=1;
+    elseif keyCode(my_key.happy)==1;
+        Trialevents.AFCresp{i}(i)=2;
+    end
+    
+    Trialevents.AFCTRT{i}=secs-t1;
     
     %Perceptual awareness scale and slidebar elements;
     
