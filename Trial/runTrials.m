@@ -35,7 +35,7 @@ end
 % Frame
   const.tex.Frametex=Screen('MakeTexture', scr.main, im2uint8(randn(1000,1000)));
   const.tex.Greytex=Screen('MakeTexture', scr.main, im2uint8(repmat(0.5,1000,1000)));
-  
+  const.awrect=CenterRect(const.baseBar, scr.rect);
 % Define Rects
 [const.framerect,dh,dv] = CenterRect([0 0 (const.element_size*const.asp)+const.framewidth const.element_size+const.framewidth], scr.rect)
 [const.maskrect,dh,dv] = CenterRect([0 0 const.element_size*const.asp const.element_size], scr.rect)
@@ -47,7 +47,7 @@ log_txt=sprintf(text.formatSpecStart,num2str(clock));
 fprintf(const.log_text_fid,'%s\n',log_txt);
 Trialevents.elapsed=cell(1,length(Trialevents.trialmat));
 
- for i = 1:10;
+ for i = 1:4;
 
     % Run single trial
    [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,i);
