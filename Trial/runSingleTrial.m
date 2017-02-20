@@ -50,7 +50,8 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
    
     % 2AFC target face judgement
     Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
-    DrawFormattedText(scr.main, text.AFC, 'justifytomax', scr.y_mid, WhiteIndex(scr.main),[],[]);
+    Screen('DrawTexture',scr.main,const.tex.Greytex,[const.maskrect]);
+    DrawFormattedText(scr.main, text.AFC, scr.y_mid, scr.y_mid, WhiteIndex(scr.main),[],[]);
     Screen('Flip',scr.main,[M2onset+const.maskdur]);
     
     t1=GetSecs;
@@ -62,7 +63,7 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
     if keyCode(my_key.angry)==1;
         Trialevents.AFCresp{i}=1;
     elseif keyCode(my_key.happy)==1;
-        Trialevents.AFCresp{i}(i)=2;
+        Trialevents.AFCresp{i}=2;
     end
     
     Trialevents.AFCTRT{i}=secs-t1;

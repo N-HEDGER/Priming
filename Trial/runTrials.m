@@ -34,7 +34,8 @@ end
 
 % Frame
   const.tex.Frametex=Screen('MakeTexture', scr.main, im2uint8(randn(1000,1000)));
-
+  const.tex.Greytex=Screen('MakeTexture', scr.main, im2uint8(repmat(0.5,1000,1000)));
+  
 % Define Rects
 [const.framerect,dh,dv] = CenterRect([0 0 (const.element_size*const.asp)+const.framewidth const.element_size+const.framewidth], scr.rect)
 [const.maskrect,dh,dv] = CenterRect([0 0 const.element_size*const.asp const.element_size], scr.rect)
