@@ -1,3 +1,5 @@
-# Priming
+# Priming Experiment. Coded by Nick Hedger, Feb 2017
 
-Selected 20 models, 10 lots of IAPS stimuli
+The main file that runs the experiment is 'ExpLauncher.m'.
+
+Summary of conditions and trial events:
