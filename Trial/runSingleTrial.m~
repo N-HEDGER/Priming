@@ -70,19 +70,18 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
     SetMouse(const.awrect(1), const.awrect(2), scr.main);
     while 1
     %Perceptual awareness scale and slidebar elements;
-    for i=const.awrect(1):160:const.awrect(3)
+    
+    for tick=round(linspace(const.awrect(1),const.awrect(3),4))
         
-        tick_offset = OffsetRect(const.tick, i, const.awrect(2)-2);
-         Screen('FillRect', scr.main, const.rectColor, tick_offset);
+        tick_offset = OffsetRect(const.tick, tick, const.awrect(2)-2);
+        Screen('FillRect', scr.main, const.rectColor, tick_offset);
     end
     
    
     
     Screen('FillRect', scr.main, const.rectColor, const.awrect);
     
-    Screen('Flip',scr.main,[]);
     
-   
     [mx, my, buttons] = GetMouse(scr.main);
     inside_bar = IsInRect(mx, my+1, const.awrect);
     resprect = CenterRectOnPointd(const.selectRect, mx, const.awrect(2)+1);
@@ -92,12 +91,9 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
    
    [KeyIsDown, endrt, KeyCode]=KbCheck;
    if KeyCode(my_key.space) && ismember(round(mx),const.awrect(1):const.awrect(3)) && sum(buttons) > 0
-
+    Trialevents.awResp(i) = round(mx);
        break;
    end
-   
-  
-   
    
    Screen('Flip', scr.main);
    
@@ -105,6 +101,6 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
                 offsetSet = 0;
            end
     end
-     Trialevents.awResp{i} = mx;
+    
     Screen('Flip', scr.main);
 end

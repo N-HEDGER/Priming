@@ -27,7 +27,7 @@ text.targemlabel={'anger','happy'};
 text.targmorphstrengthlabel={'low','high'};
 text.formatSpecTrial=('Trial %s Primetype: %s Prime valence: %s Target emotion: %s Target morph strength: %s');
 text.AFC='Angry (Left) or Happy (Right)?';
-text.PASlabel={sprintf('No\n experience'),sprintf('Weak\n experience'),sprintf('Almost\n clear\n experience'),sprintf('Clear\n experience')};
+text.PASlabel={'No experience','Weak experience','Almost clear experience','Clear experience'};
 
 end
 

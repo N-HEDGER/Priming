@@ -68,16 +68,24 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
     
     Trialevents.AFCTRT{i}=secs-t1;
     SetMouse(const.awrect(1), const.awrect(2), scr.main);
+    
+    range=const.awrect(3)-const.awrect(1);
+    rescaled=linspace(1,4,range);
+    
     while 1
     %Perceptual awareness scale and slidebar elements;
-    for tick=round(linspace(const.awrect(1),const.awrect(3),4))
+    vect=round(linspace(const.awrect(1),const.awrect(3),4));
+    for tick=vect
         
         tick_offset = OffsetRect(const.tick, tick, const.awrect(2)-2);
-         Screen('FillRect', scr.main, const.rectColor, tick_offset);
+        Screen('FillRect', scr.main, const.rectColor, tick_offset);
     end
     
+   for txt=1:4 
+   DrawFormattedText(scr.main, text.PASlabel{txt},vect(txt)-(0.3*(vect(2)-vect(1))), const.awrect(2)-150, WhiteIndex(scr.main),[],[]);
+   DrawFormattedText(scr.main, num2str(txt),vect(txt), const.awrect(2)+40, WhiteIndex(scr.main),[],[]);
+   end
    
-    
     Screen('FillRect', scr.main, const.rectColor, const.awrect);
     
     
@@ -90,7 +98,7 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
    
    [KeyIsDown, endrt, KeyCode]=KbCheck;
    if KeyCode(my_key.space) && ismember(round(mx),const.awrect(1):const.awrect(3)) && sum(buttons) > 0
-    Trialevents.awResp(i) = round(mx);
+    Trialevents.awResp(i) = rescaled(round(mx)-const.awrect(1));
        break;
    end
    
@@ -101,5 +109,7 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
            end
     end
     
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Greytex,[const.maskrect]);
     Screen('Flip', scr.main);
 end
