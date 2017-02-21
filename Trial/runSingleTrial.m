@@ -31,26 +31,26 @@ trial.targem =Trialevents.trialmat(i,4);
 trial.targmorphstrength=Trialevents.trialmat(i,5); 
 trial.SOA=Trialevents.trialmat(i,6)/1000; 
 
-
+% Print the condition details to the external file.
 log_txt=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.primetype},text.primevallabel{trial.primeval},text.targemlabel{trial.targem},text.targmorphstrengthlabel{trial.targmorphstrength});
 fprintf(const.log_text_fid,'%s\n',log_txt);
 
     %% Drawings
     %  First mask
-    Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
-    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[const.maskrect]);
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[],[const.maskrect]);
     M1onset=Screen('Flip',scr.main);
     % Prime Stim     
     
     %  Second mask
-    Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
-    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[const.maskrect]);
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[],[const.maskrect]);
     M2onset=Screen('Flip',scr.main,[M1onset+trial.SOA]);
     Trialevents.elapsed{i}=M2onset-M1onset;
    
     % 2AFC target face judgement
-    Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
-    Screen('DrawTexture',scr.main,const.tex.Greytex,[const.maskrect]);
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
     DrawFormattedText(scr.main, text.AFC, scr.y_mid, scr.y_mid, WhiteIndex(scr.main),[],[]);
     Screen('Flip',scr.main,[M2onset+const.maskdur]);
     
@@ -67,35 +67,48 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
     end
     
     Trialevents.AFCTRT{i}=secs-t1;
+    
+    % 2AFC face/IAPS judgement.
+    
+    
+    % PAS response.
+    %     Set Mouse to initial location.
+    
     SetMouse(const.awrect(1), const.awrect(2), scr.main);
+    
+    %     Define response range and rescale this to the 1-4 range.
     
     range=const.awrect(3)-const.awrect(1);
     rescaled=linspace(1,4,range);
     
+    
     while 1
-    %Perceptual awareness scale and slidebar elements;
+        %         Draw tickmarks
     vect=round(linspace(const.awrect(1),const.awrect(3),4));
     for tick=vect
-        
         tick_offset = OffsetRect(const.tick, tick, const.awrect(2)-2);
         Screen('FillRect', scr.main, const.rectColor, tick_offset);
     end
     
-   for txt=1:4 
-   DrawFormattedText(scr.main, text.PASlabel{txt},vect(txt)-(0.3*(vect(2)-vect(1))), const.awrect(2)-150, WhiteIndex(scr.main),[],[]);
-   DrawFormattedText(scr.main, num2str(txt),vect(txt), const.awrect(2)+40, WhiteIndex(scr.main),[],[]);
-   end
-   
+    %     Draw PAS labels and numbers.
+    for txt=1:4
+        DrawFormattedText(scr.main, text.PASlabel{txt},vect(txt)-(0.3*(vect(2)-vect(1))), const.awrect(2)-150, WhiteIndex(scr.main),[],[]);
+        DrawFormattedText(scr.main, num2str(txt),vect(txt), const.awrect(2)+40, WhiteIndex(scr.main),[],[]);
+    end
+    
+    %    Draw the response bar
     Screen('FillRect', scr.main, const.rectColor, const.awrect);
     
-    
+    %     Get mouse position and determine whether or not it is in the bar.
     [mx, my, buttons] = GetMouse(scr.main);
     inside_bar = IsInRect(mx, my+1, const.awrect);
     resprect = CenterRectOnPointd(const.selectRect, mx, const.awrect(2)+1);
    
-   
-   Screen('FillRect', scr.main, const.blue, resprect);
-   
+    %    Draw slider at new location
+    Screen('FillRect', scr.main, const.blue, resprect);
+    
+    %    Mouse must be clicked, spacebar must be pressed and slider must be
+    %    within response bar range.
    [KeyIsDown, endrt, KeyCode]=KbCheck;
    if KeyCode(my_key.space) && ismember(round(mx),const.awrect(1):const.awrect(3)) && sum(buttons) > 0
     Trialevents.awResp(i) = rescaled(round(mx)-const.awrect(1));
@@ -109,7 +122,7 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
            end
     end
     
-    Screen('DrawTexture',scr.main,const.tex.Frametex,[const.framerect]);
-    Screen('DrawTexture',scr.main,const.tex.Greytex,[const.maskrect]);
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
     Screen('Flip', scr.main);
 end

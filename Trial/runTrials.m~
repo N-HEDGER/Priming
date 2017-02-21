@@ -29,13 +29,13 @@ function runTrials(scr,const,Trialevents,my_key,text)
 Masks=load('masks.mat');
 Masks=Masks.noiseim;
 for t=1:length(Masks)
-    Masks2{t}=imresize(im2uint8(Masks{t}),[const.element_size round(const.element_size*const.asp)]);
+    Masks2{t}=imresize(im2uint8(Masks{t}),[const.element_size round(const.element_size*const.asp)])
     const.tex.Masktex{t}=Screen('MakeTexture', scr.main,Masks2{t});
 end
 
 % Frame
-  Frametex=im2uint8(randn(const.element_size+const.framewidth,round(const.element_size*const.asp)+const.framewidth));
-  const.tex.Frametex=Screen('MakeTexture', scr.main,Frametex);
+
+  const.tex.Frametex=Screen('MakeTexture', scr.main, im2uint8(randn(const.element_size+const.framewidth,round(const.element_size*const.asp)+const.framewidth)));
   const.tex.Greytex=Screen('MakeTexture', scr.main, im2uint8(repmat(0.5,const.element_size,const.element_size*round(const.asp))));
   const.awrect=CenterRect(const.baseBar, scr.rect);
 % Define Rects
