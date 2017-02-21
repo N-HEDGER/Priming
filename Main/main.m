@@ -26,7 +26,7 @@ function main(const)
 
 % Text configurations
 % -----------------------
-[text] = textConfig;
+[text] = textconfig;
 
 % Experimental constant
 % ---------------------

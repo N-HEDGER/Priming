@@ -63,7 +63,8 @@ const.slidebar_yPosition=const.stimbot*0.85;
 const.baseBar =[0 0  const.slidebar_xsize  const.slidebar_ysize];
 const.tick = [0 0 4 10];
 const.rectColor=[200 200 200];
-
+const.selectRect = [0 0 10 40];
+const.blue=[0 0 200];
 % Mask;
 const.maskdur=0.2;
 

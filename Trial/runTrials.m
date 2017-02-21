@@ -46,6 +46,8 @@ end
 log_txt=sprintf(text.formatSpecStart,num2str(clock));
 fprintf(const.log_text_fid,'%s\n',log_txt);
 Trialevents.elapsed=cell(1,length(Trialevents.trialmat));
+Trialevents.awResp=zeros(1,length(Trialevents.trialmat));
+Trialevents.AFCresp=cell(1,length(Trialevents.trialmat));
 
  for i = 1:4;
 
