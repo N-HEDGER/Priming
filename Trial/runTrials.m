@@ -33,6 +33,43 @@ for t=1:length(Masks)
     const.tex.Masktex{t}=Screen('MakeTexture', scr.main,Masks2{t});
 end
 
+
+IAPS=load('IAPS.mat');
+IAPS=IAPS.IAPS2;
+
+IAPS2=cell(2,10);
+for t=1:10
+  
+    IAPS2{1,t}=imresize(im2uint8(IAPS{t}),[const.element_size round(const.element_size*const.asp)]);
+    const.tex.IAPStex{1,t}=Screen('MakeTexture', scr.main,IAPS2{1,t});
+end
+for t=11:20
+    IAPS2{2,t-10}=imresize(im2uint8(IAPS{t}),[const.element_size round(const.element_size*const.asp)]);
+    const.tex.IAPStex{2,t-10}=Screen('MakeTexture', scr.main,IAPS2{2,t-10});
+end
+
+
+PRIMES=load('PRIMES.mat');
+PRIMES=PRIMES.images;
+IMMASK=imread('IMMASK.jpg');
+
+for t=1:10
+  
+    FACES2{1,t}=imresize(im2uint8(PRIMES{1,t}),[const.element_size round(const.element_size*const.faceasp)]);
+    FACES2{1,t}(:,:,4)=imresize(IMMASK(:,:,3),[const.element_size round(const.element_size*const.faceasp)]);
+
+    const.tex.FACEStex{1,t}=Screen('MakeTexture', scr.main,FACES2{1,t});
+    
+     FACES2{2,t}=imresize(im2uint8(PRIMES{2,t}),[const.element_size round(const.element_size*const.faceasp)]);
+     FACES2{2,t}(:,:,4)=imresize(IMMASK(:,:,3),[const.element_size round(const.element_size*const.faceasp)]);
+
+    const.tex.FACEStex{2,t}=Screen('MakeTexture', scr.main,FACES2{2,t});
+    
+end
+
+
+
+
 % Frame
   Frametex=im2uint8(randn(const.element_size+const.framewidth,round(const.element_size*const.asp)+const.framewidth));
   const.tex.Frametex=Screen('MakeTexture', scr.main,Frametex);
@@ -41,6 +78,7 @@ end
 % Define Rects
 [const.framerect,dh,dv] = CenterRect([0 0 round(const.element_size*const.asp)+const.framewidth const.element_size+const.framewidth], scr.rect)
 [const.maskrect,dh,dv] = CenterRect([0 0 round(const.element_size*const.asp) const.element_size], scr.rect)
+[const.stimrect,dh,dv] = CenterRect([0 0 round(const.element_size*const.faceasp) round(const.element_size)], scr.rect)
 
 
 %% Experimental loop
@@ -51,7 +89,7 @@ Trialevents.elapsed=cell(1,length(Trialevents.trialmat));
 Trialevents.awResp=zeros(1,length(Trialevents.trialmat));
 Trialevents.AFCresp=cell(1,length(Trialevents.trialmat));
 
- for i = 1:4;
+ for i = 1:10;
 
     % Run single trial
    [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,i);

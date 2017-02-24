@@ -30,6 +30,7 @@ trial.primeval=Trialevents.trialmat(i,3);
 trial.targem =Trialevents.trialmat(i,4);           
 trial.targmorphstrength=Trialevents.trialmat(i,5); 
 trial.SOA=Trialevents.trialmat(i,6)/1000; 
+trial.Model=Trialevents.trialmat(i,7);
 
 % Print the condition details to the external file.
 log_txt=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.primetype},text.primevallabel{trial.primeval},text.targemlabel{trial.targem},text.targmorphstrengthlabel{trial.targmorphstrength});
@@ -39,9 +40,16 @@ fprintf(const.log_text_fid,'%s\n',log_txt);
     %  First mask
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[],[const.maskrect]);
-    M1onset=Screen('Flip',scr.main);
-    % Prime Stim     
+    M1onset=Screen('Flip',scr.main,[],1);
+    % Prime Stim 
+    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[],[const.maskrect]);
     
+    if trial.primetype==1
+    Screen('DrawTexture',scr.main,const.tex.FACEStex{trial.primeval,trial.Model},[],[const.maskrect]);
+    else
+    Screen('DrawTexture',scr.main,const.tex.FACEStex{trial.primeval,trial.Model},[],[const.maskrect]);
+    M1onset=Screen('Flip',scr.main,[]);  
+    end
     %  Second mask
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[],[const.maskrect]);

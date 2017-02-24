@@ -36,18 +36,15 @@ function main(const)
 % -------------------
 [Trialevents] = designConfig(const);
 
-
 const.log_text_fid=fopen(const.txtfilename,'a+');
 
 % Open screen window
 
 % ------------------
-
 Screen('Preference', 'SkipSyncTests', 1); 
 [scr.main,scr.rect] = Screen('OpenWindow',scr.scr_num,const.background_color,[], scr.clr_depth,2);
 Screen('BlendFunction', scr.main, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 priorityLevel = MaxPriority(scr.main);Priority(priorityLevel);
-
 DrawFormattedText(scr.main, text.instruct, 'justifytomax', 100, WhiteIndex(scr.main),[],[]);
 
 % Update the display to show the instruction text:

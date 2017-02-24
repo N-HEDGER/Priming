@@ -13,7 +13,7 @@ function EventTable = GenerateEventTable(conds, repetitions, isfixed)
 
 EventTable = [];
 for i=1:repetitions
-    EventTable = [EventTable; conds];
+    EventTable = [EventTable; shoveonend(conds,i)];
 end
 
 TotalNumberOfTrials = length(EventTable(:, 1));

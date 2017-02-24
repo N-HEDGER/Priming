@@ -40,7 +40,7 @@ scr.hz = 1/(scr.frame_duration);
 
 
 % Subject dist
-scr.dist = 225;             
+scr.dist = 60;             
 
 % Center of the screen :
 scr.x_mid = (scr.scr_sizeX/2.0);
