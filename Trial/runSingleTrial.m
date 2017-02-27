@@ -35,25 +35,37 @@ trial.Model=Trialevents.trialmat(i,7);
 % Print the condition details to the external file.
 log_txt=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.primetype},text.primevallabel{trial.primeval},text.targemlabel{trial.targem},text.targmorphstrengthlabel{trial.targmorphstrength});
 fprintf(const.log_text_fid,'%s\n',log_txt);
-
+trial
     %% Drawings
     %  First mask
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
-    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[],[const.maskrect]);
+    Screen('DrawTexture',scr.main,const.tex.Masktex{1,randi(100)},[],[const.maskrect]);
     M1onset=Screen('Flip',scr.main,[],1);
+    
+    WaitSecs(3);
     % Prime Stim 
-    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[],[const.maskrect]);
+    Screen('DrawTexture',scr.main,const.tex.IAPSsctex{randi(2),randi(10)},[],[const.maskrect]);
     
     if trial.primetype==1
-    Screen('DrawTexture',scr.main,const.tex.FACEStex{trial.primeval,trial.Model},[],[const.maskrect]);
+    Screen('DrawTexture',scr.main,const.tex.FACEStex{trial.primeval,trial.Model},[],[const.stimrect]);
     else
-    Screen('DrawTexture',scr.main,const.tex.FACEStex{trial.primeval,trial.Model},[],[const.maskrect]);
-    M1onset=Screen('Flip',scr.main,[]);  
+    Screen('DrawTexture',scr.main,const.tex.IAPStex{trial.primeval,trial.Model},[],[const.maskrect]);
     end
+    M1onset=Screen('Flip',scr.main,[]);  
+    WaitSecs(3);
     %  Second mask
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
-    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(100)},[],[const.maskrect]);
+    Screen('DrawTexture',scr.main,const.tex.Masktex{2,randi(100)},[],[const.maskrect]);
     M2onset=Screen('Flip',scr.main,[M1onset+trial.SOA]);
+   
+    for i=1:10
+          Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Masktex{randi(2),randi(100)},[],[const.maskrect]);
+    M2onset=Screen('Flip',scr.main,[]);
+    end
+    
+    
+    
     Trialevents.elapsed{i}=M2onset-M1onset;
    
     % 2AFC target face judgement

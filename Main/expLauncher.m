@@ -7,7 +7,7 @@
 
 % First settings
 % --------------
-clear all;clear mex;clear functions;close all;home;ListenChar(1);
+clear vars;clear mex;clear functions;close all;home;ListenChar(1);
 
 % Desired screen settings
 % -----------------------
