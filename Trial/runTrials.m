@@ -64,25 +64,28 @@ end
 
 PRIMES=load('PRIMES.mat');
 PRIMES=PRIMES.images;
-IMMASK=imread('IMMASK.jpg');
+IMMASK=imread('AlphaMask.jpg');
 
 for t=1:10
-  
     FACES2{1,t}=imresize(im2uint8(PRIMES{1,t}),[const.element_size round(const.element_size*const.faceasp)]);
-    
-    
-    FACES2{1,t}(:,:,4)=imresize(IMMASK(:,:,3),[const.element_size round(const.element_size*const.faceasp)]);
-    
+    FACES2{1,t}(:,:,4)=imresize(IMMASK,[const.element_size round(const.element_size*const.faceasp)]);
     const.tex.FACEStex{1,t}=Screen('MakeTexture', scr.main,FACES2{1,t});
-    
     FACES2{2,t}=imresize(im2uint8(PRIMES{2,t}),[const.element_size round(const.element_size*const.faceasp)]);
-    FACES2{2,t}(:,:,4)=imresize(IMMASK(:,:,3),[const.element_size round(const.element_size*const.faceasp)]);
-    
+    FACES2{2,t}(:,:,4)=imresize(IMMASK,[const.element_size round(const.element_size*const.faceasp)]);
     const.tex.FACEStex{2,t}=Screen('MakeTexture', scr.main,FACES2{2,t});
-    
 end
 
 
+TARGETS=load('Targets.mat');
+TARGETS=TARGETS.images;
+
+for t=1:20
+    for m=1:4
+        TARGETS2{m,t}=imresize(im2uint8(TARGETS{m,t}),[const.element_size round(const.element_size*const.faceasp)]);
+        TARGETS2{m,t}(:,:,4)=imresize(IMMASK,[const.element_size round(const.element_size*const.faceasp)]);
+        const.tex.TARGETtex{m,t}=Screen('MakeTexture', scr.main,TARGETS2{m,t});
+    end
+end
 
 
 % Frame
@@ -96,20 +99,45 @@ end
 [const.stimrect,dh,dv] = CenterRect([0 0 round(const.element_size*const.faceasp) round(const.element_size)], scr.rect)
 
 
-%% Experimental loop
 
+%% Experimental loop
+if const.oldsub==0
 log_txt=sprintf(text.formatSpecStart,num2str(clock));
 fprintf(const.log_text_fid,'%s\n',log_txt);
 Trialevents.elapsed=cell(1,length(Trialevents.trialmat));
 Trialevents.awResp=zeros(1,length(Trialevents.trialmat));
 Trialevents.AFCresp=cell(1,length(Trialevents.trialmat));
+Trialevents.AFCresp2=cell(1,length(Trialevents.trialmat));
+Trialevents.morph=zeros(1,length(Trialevents.trialmat));
 
- for i = 1:20;
+for t=1:length(Trialevents.morph)
+if Trialevents.trialmat(t,4)==1 && Trialevents.trialmat(t,5)==1
+    Trialevents.morph(t)=1;
+elseif Trialevents.trialmat(t,4)==1 && Trialevents.trialmat(t,5)==2
+    Trialevents.morph(t)=2;
+elseif Trialevents.trialmat(t,4)==2 && Trialevents.trialmat(t,5)==1
+    Trialevents.morph(t)=3;
+elseif Trialevents.trialmat(t,4)==2 && Trialevents.trialmat(t,5)==2
+    Trialevents.morph(t)=4;
+end
+end
+else
+    
+log_txt=sprintf(text.formatSpecReStart,num2str(clock));
+fprintf(const.log_text_fid,'%s\n',log_txt);
+    
+end
+ for i = const.starttrial:20;
 
     % Run single trial
    [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,i);
 
     WaitSecs(const.ITI);
+    
+config.scr = scr; config.const = rmfield(const,'tex'); config.Trialevents = Trialevents; config.my_key = my_key;config.text = text;
+save(const.filename,'config');
+    
+    
 %     log_txt = sprintf('trial %i stopped at %f',t-1,GetSecs);
 %     fprintf(const.log_text_fid,'%s\n',log_txt);
     

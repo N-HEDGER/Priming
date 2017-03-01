@@ -21,7 +21,7 @@ text.formatSpecFlip=('Textures flipped at: %f');
 text.formatSpecResponse=('Response made at: %f');
 text.formatSpecQuit=('Subject quitted at: %s');
 text.formatSpecReStart=('Subject restarted at: %s');
-instruct='In this experiment you will be required to make 3 responses\n 1) Firstly you will need to indicate whether face stimuli are happy or angry as\n quicky and accurately as possible.\n 2) Next you will be required to make a decision about whether the preceding stimulus\n was a face, or an image of animal/animals \n 3) Lastly, you will be required to rate your perception of any preceding stimuli on a 4 point scale\n Below is a detailed description of how to use the scale:'
+instruct='In this experiment you will be required to make 3 responses\n 1) Firstly you will need to indicate whether face stimuli are happy or angry as quicky and accurately as possible.\n 2) Next you will be required to make a decision about whether the preceding stimulus was a face, or an image of animal/animals \n 3) Lastly, you will be required to rate your perception of any preceding stimuli on a 4 point scale\n Below is a detailed descrip'
 text.instruct=sprintf(instruct);
 text.primevallabel={'negative','positive'};
 text.primetypelabel={'face','IAPS'};
@@ -29,7 +29,6 @@ text.targemlabel={'anger','happy'};
 text.targmorphstrengthlabel={'low','high'};
 text.formatSpecTrial=('Trial %s Primetype: %s Prime valence: %s Target emotion: %s Target morph strength: %s');
 text.AFC='Angry (Left) or Happy (Right)?';
-text.AFC2='IAPS (Left) or Face (Right)?';
 text.PASlabel={sprintf('No\n experience'),sprintf('Weak\n experience'),sprintf('Almost\n clear\n experience'),sprintf('Clear\n experience')};
 
 end

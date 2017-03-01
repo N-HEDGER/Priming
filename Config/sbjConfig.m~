@@ -41,7 +41,6 @@ else
 const=config.const;
 const.oldsub=1;
 const.config=config;
-const.starttrial=str2num(const.trialsdone);
 end
 
 else
