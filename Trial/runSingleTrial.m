@@ -59,11 +59,11 @@ trial
     else
     Screen('DrawTexture',scr.main,const.tex.IAPStex{trial.primeval,trial.Model},[],[const.maskrect]);
     end
-    M1onset=Screen('Flip',scr.main,[]);  
+    primeonset=Screen('Flip',scr.main,[M1onset+const.maskdur]);  
     %  Second mask
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Masktex{2,randi(100)},[],[const.maskrect]);
-    M2onset=Screen('Flip',scr.main,[M1onset+trial.SOA]);
+    M2onset=Screen('Flip',scr.main,[primeonset+(trial.SOA-(0.011/2))]);
    
     for r=1:10
           Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
@@ -71,17 +71,20 @@ trial
     M3onset=Screen('Flip',scr.main,[]);
     end
     
-    Trialevents.elapsed{i}=M2onset-M1onset;
+    Trialevents.elapsed{i}=M2onset-primeonset;
    
     % 2AFC target face judgement
-    Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
-    Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
+     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+     Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
     Screen('DrawTexture',scr.main,const.tex.TARGETtex{trial.morph,randi(20)},[],[const.stimrect]);
-    DrawFormattedText(scr.main, text.AFC, scr.y_mid, const.stimbot*0.9, WhiteIndex(scr.main),[],[]);
     targonset=Screen('Flip',scr.main,[M2onset+const.maskdur]);
     
     t1=GetSecs;
     [KeyIsDown,secs,keyCode]=KbCheck;
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
+    DrawFormattedText(scr.main, text.AFC, scr.y_mid, const.stimbot*0.5, WhiteIndex(scr.main),[],[]);
+    Screen('Flip',scr.main,[targonset+const.targdur]);
     while keyCode(my_key.angry)==0 && keyCode(my_key.happy)==0 && keyCode(my_key.escape)==0
         [KeyisDown,secs,keyCode]=KbCheck;
     end
@@ -96,20 +99,21 @@ trial
         log_txt=sprintf(text.formatSpecQuit,num2str(clock));
         fprintf(const.log_text_fid,'%s\n',log_txt);
         save(const.filename,'config');
+        ShowCursor(1);
         Screen('CloseAll')
     end
     
-    DrawFormattedText(scr.main, text.AFC, scr.y_mid, const.stimbot*0.9, WhiteIndex(scr.main),[],[]);
-    Screen('Flip',scr.main,[targonset+const.targdur]);
+
     
     Trialevents.AFCTRT{i}=secs-t1;
     
     % 2AFC prime judgement
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
-    DrawFormattedText(scr.main, text.AFC2, scr.y_mid, const.stimbot*0.9, WhiteIndex(scr.main),[],[]);
+    DrawFormattedText(scr.main, text.AFC2, scr.y_mid-150, const.stimbot*0.5, WhiteIndex(scr.main),[],[]);
+    WaitSecs(0.5);
     Screen('Flip',scr.main,[]);
-    WaitSecs(1);
+    
     [KeyIsDown,secs,keyCode]=KbCheck;
     while keyCode(my_key.angry)==0 && keyCode(my_key.happy)==0
         [KeyisDown,secs,keyCode]=KbCheck;
@@ -174,8 +178,15 @@ trial
            end
     end
     HideCursor;
+    const.trialsdone=trial.trialnum;
+    progvec=round(linspace(1,1280,length(Trialevents.trialmat)));
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
+    Screen('FillRect', scr.main, const.rectColor, const.progrect);
+    progbar=[0 7 progvec(str2num(const.trialsdone)) 17];
+    %    Draw slider at new location
+    Screen('FillRect', scr.main, const.blue, progbar);
+    
     Screen('Flip', scr.main);
-    const.trialsdone=trial.trialnum;
+    
 end

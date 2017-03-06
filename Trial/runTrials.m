@@ -93,10 +93,11 @@ end
   const.tex.Frametex=Screen('MakeTexture', scr.main,Frametex);
   const.tex.Greytex=Screen('MakeTexture', scr.main, im2uint8(repmat(0.5,const.element_size,const.element_size*round(const.asp))));
   const.awrect=CenterRect(const.baseBar, scr.rect);
+  const.progrect=CenterRect(const.progBar, scr.rect)-[0 500 0 500];
 % Define Rects
-[const.framerect,dh,dv] = CenterRect([0 0 round(const.element_size*const.asp)+const.framewidth const.element_size+const.framewidth], scr.rect)
-[const.maskrect,dh,dv] = CenterRect([0 0 round(const.element_size*const.asp) const.element_size], scr.rect)
-[const.stimrect,dh,dv] = CenterRect([0 0 round(const.element_size*const.faceasp) round(const.element_size)], scr.rect)
+[const.framerect,dh,dv] = CenterRect([0 0 round(const.element_size*const.asp)+const.framewidth const.element_size+const.framewidth], scr.rect);
+[const.maskrect,dh,dv] = CenterRect([0 0 round(const.element_size*const.asp) const.element_size], scr.rect);
+[const.stimrect,dh,dv] = CenterRect([0 0 round(const.element_size*const.faceasp) round(const.element_size)], scr.rect);
 
 
 
