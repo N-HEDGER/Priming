@@ -44,20 +44,20 @@ IAPSsc=IAPSsc.IAPS3;
 IAPSsc2=cell(2,10);
 
 for t=1:10
-  
+ 
     IAPS2{1,t}=imresize(im2uint8(IAPS{t}),[const.element_size round(const.element_size*const.asp)]);
-    const.tex.IAPStex{1,t}=Screen('MakeTexture', scr.main,IAPS2{1,t});
+    const.tex.IAPStex{1,t}=Screen('MakeTexture', scr.main,coladjust(IAPS2{1,t},const.element_lum,const.element_con));
     
     IAPSsc2{1,t}=imresize(im2uint8(IAPSsc{t}),[const.element_size round(const.element_size*const.asp)]);
-    const.tex.IAPSsctex{1,t}=Screen('MakeTexture', scr.main,IAPSsc2{1,t});
+    const.tex.IAPSsctex{1,t}=Screen('MakeTexture', scr.main,coladjust(IAPSsc2{1,t},const.element_lum,const.element_con));
     
 end
 for t=11:20
     IAPS2{2,t-10}=imresize(im2uint8(IAPS{t}),[const.element_size round(const.element_size*const.asp)]);
-    const.tex.IAPStex{2,t-10}=Screen('MakeTexture', scr.main,IAPS2{2,t-10});
+    const.tex.IAPStex{2,t-10}=Screen('MakeTexture', scr.main,coladjust(IAPS2{2,t-10},const.element_lum,const.element_con));
     
     IAPSsc2{2,t-10}=imresize(im2uint8(IAPSsc{t}),[const.element_size round(const.element_size*const.asp)]);
-    const.tex.IAPSsctex{2,t-10}=Screen('MakeTexture', scr.main,IAPSsc2{2,t-10});
+    const.tex.IAPSsctex{2,t-10}=Screen('MakeTexture', scr.main,coladjust(IAPSsc2{2,t-10},const.element_lum,const.element_con));
     
 end
 
@@ -67,10 +67,10 @@ PRIMES=PRIMES.images;
 IMMASK=imread('AlphaMask.jpg');
 
 for t=1:10
-    FACES2{1,t}=imresize(im2uint8(PRIMES{1,t}),[const.element_size round(const.element_size*const.faceasp)]);
+    FACES2{1,t}=coladjust(imresize(im2uint8(PRIMES{1,t}),[const.element_size round(const.element_size*const.faceasp)]),const.element_lum,const.element_con);
     FACES2{1,t}(:,:,4)=imresize(IMMASK,[const.element_size round(const.element_size*const.faceasp)]);
     const.tex.FACEStex{1,t}=Screen('MakeTexture', scr.main,FACES2{1,t});
-    FACES2{2,t}=imresize(im2uint8(PRIMES{2,t}),[const.element_size round(const.element_size*const.faceasp)]);
+    FACES2{2,t}=coladjust(imresize(im2uint8(PRIMES{2,t}),[const.element_size round(const.element_size*const.faceasp)]),const.element_lum,const.element_con);
     FACES2{2,t}(:,:,4)=imresize(IMMASK,[const.element_size round(const.element_size*const.faceasp)]);
     const.tex.FACEStex{2,t}=Screen('MakeTexture', scr.main,FACES2{2,t});
 end
@@ -127,7 +127,12 @@ log_txt=sprintf(text.formatSpecReStart,num2str(clock));
 fprintf(const.log_text_fid,'%s\n',log_txt);
     
 end
- for i = const.starttrial:20;
+
+DrawFormattedText(scr.main, 'PRESS ANY KEY TO BEGIN', 'justifytomax', 100, WhiteIndex(scr.main),[],[]);
+Screen('Flip', scr.main);
+KbWait;
+
+ for i = const.starttrial:length(Trialevents.trialmat);
 
     % Run single trial
    [Trialevents] = runSingleTrial(scr,const,Trialevents,my_key,text,i);

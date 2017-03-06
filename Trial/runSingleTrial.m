@@ -36,11 +36,21 @@ trial.morph=Trialevents.morph(i);
 log_txt=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.primetype},text.primevallabel{trial.primeval},text.targemlabel{trial.targem},text.targmorphstrengthlabel{trial.targmorphstrength});
 fprintf(const.log_text_fid,'%s\n',log_txt);
 trial
-    %% Drawings
+    
+
+%% Drawings
+    HideCursor;
+    % Fixation dot;
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
+    Screen('DrawDots',scr.main,scr.mid,const.bigfixsize,const.bigfixcol,[],1);
+    Screen('DrawDots',scr.main,scr.mid,const.smallfixsize,const.smallfixcol,[],1);
+    Fixonset=Screen('Flip',scr.main,[],[1]);
+    
     %  First mask
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Masktex{1,randi(100)},[],[const.maskrect]);
-    M1onset=Screen('Flip',scr.main,[],1);
+    M1onset=Screen('Flip',scr.main,[Fixonset+const.fixdur],[1]);
     % Prime Stim 
     Screen('DrawTexture',scr.main,const.tex.IAPSsctex{randi(2),randi(10)},[],[const.maskrect]);
     
@@ -58,10 +68,8 @@ trial
     for r=1:10
           Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Masktex{randi(2),randi(100)},[],[const.maskrect]);
-    M2onset=Screen('Flip',scr.main,[]);
+    M3onset=Screen('Flip',scr.main,[]);
     end
-    
-    
     
     Trialevents.elapsed{i}=M2onset-M1onset;
    
@@ -70,7 +78,7 @@ trial
     Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
     Screen('DrawTexture',scr.main,const.tex.TARGETtex{trial.morph,randi(20)},[],[const.stimrect]);
     DrawFormattedText(scr.main, text.AFC, scr.y_mid, const.stimbot*0.9, WhiteIndex(scr.main),[],[]);
-    Screen('Flip',scr.main,[M2onset+const.maskdur]);
+    targonset=Screen('Flip',scr.main,[M2onset+const.maskdur]);
     
     t1=GetSecs;
     [KeyIsDown,secs,keyCode]=KbCheck;
@@ -90,6 +98,9 @@ trial
         save(const.filename,'config');
         Screen('CloseAll')
     end
+    
+    DrawFormattedText(scr.main, text.AFC, scr.y_mid, const.stimbot*0.9, WhiteIndex(scr.main),[],[]);
+    Screen('Flip',scr.main,[targonset+const.targdur]);
     
     Trialevents.AFCTRT{i}=secs-t1;
     
@@ -114,7 +125,7 @@ trial
     
     % PAS response.
     %     Set Mouse to initial location.
-    
+    ShowCursor;
     SetMouse(const.awrect(1), const.awrect(2), scr.main);
     
     %     Define response range and rescale this to the 1-4 range.
@@ -162,7 +173,7 @@ trial
                 offsetSet = 0;
            end
     end
-    
+    HideCursor;
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
     Screen('Flip', scr.main);

@@ -37,10 +37,17 @@ log_txt=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.pr
 fprintf(const.log_text_fid,'%s\n',log_txt);
 trial
     %% Drawings
+    % Fixation dot;
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
+    Screen('DrawDots',scr.main,scr.mid,const.bigfixsize,const.bigfixcol,[],1);
+    Screen('DrawDots',scr.main,scr.mid,const.smallfixsize,const.smallfixcol,[],1);
+    Fixonset=Screen('Flip',scr.main,[],[1]);
+    
     %  First mask
     Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Masktex{1,randi(100)},[],[const.maskrect]);
-    M1onset=Screen('Flip',scr.main,[],1);
+    M1onset=Screen('Flip',scr.main,[Fixonset+const.fixdur],[1]);
     % Prime Stim 
     Screen('DrawTexture',scr.main,const.tex.IAPSsctex{randi(2),randi(10)},[],[const.maskrect]);
     
@@ -58,7 +65,7 @@ trial
     for r=1:10
           Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
     Screen('DrawTexture',scr.main,const.tex.Masktex{randi(2),randi(100)},[],[const.maskrect]);
-    M2onset=Screen('Flip',scr.main,[]);
+    M3onset=Screen('Flip',scr.main,[]);
     end
     
     
@@ -82,11 +89,33 @@ trial
         Trialevents.AFCresp{i}=1;
     elseif keyCode(my_key.happy)==1;
         Trialevents.AFCresp{i}=2;
-    elseif KeyCode
+    elseif keyCode(my_key.escape)==1
+        const.trialsdone=trial.trialnum;
+        config.scr = scr; config.const = rmfield(const,'tex'); config.Trialevents = Trialevents; config.my_key = my_key;config.text = text;
+        log_txt=sprintf(text.formatSpecQuit,num2str(clock));
+        fprintf(const.log_text_fid,'%s\n',log_txt);
+        save(const.filename,'config');
+        Screen('CloseAll')
     end
     
     Trialevents.AFCTRT{i}=secs-t1;
     
+    % 2AFC prime judgement
+    Screen('DrawTexture',scr.main,const.tex.Frametex,[],[const.framerect]);
+    Screen('DrawTexture',scr.main,const.tex.Greytex,[],[const.maskrect]);
+    DrawFormattedText(scr.main, text.AFC2, scr.y_mid, const.stimbot*0.9, WhiteIndex(scr.main),[],[]);
+    Screen('Flip',scr.main,[]);
+    WaitSecs(1);
+    [KeyIsDown,secs,keyCode]=KbCheck;
+    while keyCode(my_key.angry)==0 && keyCode(my_key.happy)==0
+        [KeyisDown,secs,keyCode]=KbCheck;
+    end
+    
+    if keyCode(my_key.angry)==1;
+        Trialevents.AFCresp2{i}=1;
+    elseif keyCode(my_key.happy)==1;
+        Trialevents.AFCresp2{i}=2;
+    end
     % 2AFC face/IAPS judgement.
     
     

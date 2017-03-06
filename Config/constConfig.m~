@@ -44,8 +44,7 @@ const.ITI=2;
 
 %% Stimulus parameters
 const.background_color=[128 128 128];
-const.element_con=0.4;
-const.element_lum=0.6;
+
 const.element_sizeVal=10;
 const.element_size=round(vaDeg2pix(const.element_sizeVal,scr));
 const.stimctr=scr.mid;
@@ -68,16 +67,14 @@ const.rectColor=[200 200 200];
 const.selectRect = [0 0 10 40];
 const.blue=[0 0 200];
 
-const.bigfixsizeval=0.75;
+const.bigfixsizeval=1;
 const.bigfixsize=round(vaDeg2pix(const.bigfixsizeval,scr));
-const.smallfixsizeval=0.5;
-const.smallfixsize=round(vaDeg2pix(const.smallfixsizeval,scr));
+const.smallfixsizeval=0.75;
+const.smallfixsize=round(vaDeg2pix(const.bigfixsizeval,scr));
 const.bigfixcol=[0 0 0];
-const.smallfixcol=[70 70 70];
+const.smallfixcol=[
 
 % Mask;
 const.maskdur=0.2;
-const.fixdur=1;
-const.targdur=0.5;
 
 end
