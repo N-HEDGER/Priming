@@ -36,7 +36,7 @@ trial.morph=Trialevents.morph(i);
 log_txt=sprintf(text.formatSpecTrial,trial.trialnum,text.primetypelabel{trial.primetype},text.primevallabel{trial.primeval},text.targemlabel{trial.targem},text.targmorphstrengthlabel{trial.targmorphstrength});
 fprintf(const.log_text_fid,'%s\n',log_txt);
 trial
-    
+const.trialsdone=trial.trialnum;
 
 %% Drawings
     HideCursor;

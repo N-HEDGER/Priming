@@ -32,7 +32,7 @@ const.targem=2;
 const.targmorphstrength =2;
 % Low, High.
 
-const.SOAs=[11.11 22.22 33.33 77.77 500 1000];
+const.SOAs=[11.11 22.22 44.44 500 1000];
 % May need adjuting based on refresh we seem to have.
 
 const.reps=10;
